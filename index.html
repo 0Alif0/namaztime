@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f3ea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Namaz">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Namaz</title>
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="hero" aria-labelledby="brand">
+      <div id="brand" class="brand">NAMAZ</div>
+      <div id="gregorian" class="gregorian">Tuesday, September 8</div>
+      <div id="hijri" class="hijri">26 Rabi al-Awwal 1448 AH</div>
+      <div id="special" class="special hidden" role="status"></div>
+      <div class="location-line">
+        <span id="locationName">Brooklyn, New York</span>
+        <button id="locationButton" class="text-button" type="button">Use my location</button>
+      </div>
+    </header>
+
+    <section class="card prayer-card" aria-labelledby="prayerHeading">
+      <div id="prayerHeading" class="eyebrow">TODAY'S PRAYER TIMES</div>
+      <div id="prayers" class="prayers"></div>
+    </section>
+
+    <section class="card compact-card" aria-labelledby="tahajjudHeading">
+      <div id="tahajjudHeading" class="eyebrow">TAHAJJUD</div>
+      <div id="tahajjudTime" class="large-value">1:54 AM – 5:12 AM</div>
+      <div class="muted">Final third of the night • ends at Fajr</div>
+    </section>
+
+    <section class="card qibla-card" aria-labelledby="qiblaHeading">
+      <div class="eyebrow" id="qiblaHeading">QIBLA</div>
+      <div class="qibla-wrap">
+        <div class="compass" aria-hidden="true">
+          <span class="tick top"></span><span class="tick right"></span><span class="tick bottom"></span><span class="tick left"></span>
+          <div id="qiblaArrow" class="qibla-arrow"></div>
+          <div class="compass-center"></div>
+        </div>
+        <div id="qiblaValue" class="qibla-degrees">59°</div>
+        <div id="qiblaDirection" class="muted">east-northeast of true north</div>
+        <button id="compassButton" type="button" class="text-button large-button">Tap for compass</button>
+      </div>
+    </section>
+
+    <section class="card notification-card" aria-labelledby="notificationHeading">
+      <div class="eyebrow" id="notificationHeading">PRAYER NOTIFICATIONS</div>
+      <div id="notificationRows" class="notification-rows"></div>
+      <div class="action-row">
+        <button id="muteAll" type="button" class="outline-button">Mute all</button>
+        <button id="enableAll" type="button" class="solid-button">Enable all</button>
+      </div>
+      <div id="notificationStatus" class="muted notification-status" role="status">Choose prayer reminders. Notifications use push only.</div>
+    </section>
+
+    <footer class="footer">Prayer times use the Islamic Society of North America (ISNA) method.</footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
